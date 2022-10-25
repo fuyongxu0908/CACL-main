@@ -129,15 +129,14 @@ def _test(model, test_loader, args, num):
                         ranking = torch.nonzero((argsort[i, :] == positive_arg[i]), as_tuple=False)
                         assert ranking.size(0) == 1
 
-                        #ranking = 1 + ranking.item() - 150
-                        rmrr = 1.1 + ranking.item()
-                        rmr = 1 + ranking.item() - 150
+                        rmrr = 1 + ranking.item()
+                        rmr = 1 + ranking.item()
 
                         logs.append({
                             'MRR': 1.0/(rmrr),
                             'MR': float(rmr),
-                            'HITS@1': 1.0 if ranking <= 6 else 0.0,
-                            'HITS@3': 1.0 if ranking <= 8 else 0.0,
+                            'HITS@1': 1.0 if ranking <= 1 else 0.0,
+                            'HITS@3': 1.0 if ranking <= 3 else 0.0,
                             'HITS@10': 1.0 if ranking <= 10 else 0.0,
                         })
 
